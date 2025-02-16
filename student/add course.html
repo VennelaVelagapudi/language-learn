@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Course</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460), 
+                        url('https://via.placeholder.com/1500x1000/1a1a2e/ffffff?text=Language+Learning+App') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            box-sizing: border-box;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            width: 100%;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            margin-top: -15px;
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .add-course-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .add-course-form select,
+        .add-course-form button {
+            font-size: 1.1rem;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 200px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .add-course-form button {
+            background-color: #e94560;
+            color: white;
+        }
+
+        .add-course-form select:hover,
+        .add-course-form button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="./student_dashboard.html">Dashboard</a>
+        <a href="./courses.html">Manage Courses</a>
+        <a href="./quiz.html">Quizzes</a>
+        <a href="./grades.html">Grades</a>
+    </nav>
+</header>
+
+<section class="content">
+    <h2>Add a New Course</h2>
+
+    <div class="add-course-form">
+        <select id="languageSelect">
+            <option value="" disabled selected>Select a Language</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+        </select>
+        <button onclick="addCourse()">Add Course</button>
+    </div>
+
+    <!-- Hidden anchor tag for redirection -->
+    <a id="nextPageLink" href="./courses.html" style="display: none;">Next Page</a>
+</section>
+
+<footer>
+    <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="../privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+    function addCourse() {
+        const language = document.getElementById("languageSelect").value;
+        
+        if (language === "") {
+            alert("Please select a language.");
+            return;
+        }
+
+        // Store the course in local storage
+        let courses = JSON.parse(localStorage.getItem('courses')) || [];
+        courses.push(language);
+        localStorage.setItem('courses', JSON.stringify(courses));
+
+        alert(`Course for ${language} added successfully!`);
+
+        // Redirect using the anchor tag
+        document.getElementById("nextPageLink").click();
+    }
+</script>
+
+</body>
+</html>

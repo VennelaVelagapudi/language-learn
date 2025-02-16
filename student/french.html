@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> French Course</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 70px; /* Add padding to prevent content overlap with navbar */
+            margin-bottom: 0; /* Remove extra margin below the footer */
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin-top: -3px;
+            padding: 10px 0;
+            z-index: 1000;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #e94560;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #ddd;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .lessons-container {
+            width: 50%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            margin-bottom: 20px;
+            max-height: 300px; /* Initial fixed height */
+            overflow-y: hidden; /* Initially hide scrollbar */
+            transition: max-height 0.3s ease-in-out, overflow-y 0.3s ease-in-out;
+        }
+
+        .lessons-container.expanded {
+            overflow-y: auto; /* Show scrollbar when expanded */
+            max-height: 90vh; /* Increase height when expanded */
+        }
+
+        .lesson {
+            margin-bottom: 20px;
+        }
+
+        .lesson button {
+            width: 100%;
+            background-color: #ada9a9;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: left;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .lesson button::after {
+            content: '>';
+            position: absolute;
+            right: 20px;
+            font-size: 1rem;
+            transform: rotate(90deg);
+            transition: transform 0.3s;
+        }
+
+        .lesson button.active::after {
+            transform: rotate(-90deg);
+        }
+
+        .lesson button:hover {
+            background-color: #534f4f;
+            color: rgb(255, 255, 255);
+            transform: scale(1.02);
+        }
+
+        .lesson-content {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .lesson-content h3 {
+            text-decoration: underline;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-content ul {
+            list-style-type: disc;
+            margin: 10px 0 0 20px;
+        }
+
+       
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 50%;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e94560;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff4d6d;
+            transform: scale(1.05);
+        }
+
+        .btn-blue {
+            background-color: #007BFF;
+        }
+
+        .btn-green {
+            background-color: #28a745;
+        }
+
+        .btn-blue:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-green:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 0; /* Remove extra space below footer */
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function toggleLessonContent(id, button) {
+            const content = document.getElementById(id);
+            const allContent = document.querySelectorAll('.lesson-content');
+            const allButtons = document.querySelectorAll('.lesson button');
+            const container = document.querySelector('.lessons-container');
+
+            // Close all other lessons
+            allContent.forEach(item => {
+                if (item !== content) {
+                    item.style.display = "none";
+                }
+            });
+
+            allButtons.forEach(item => {
+                if (item !== button) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle the current lesson
+            const isVisible = content.style.display === "block";
+            content.style.display = isVisible ? "none" : "block";
+            button.classList.toggle('active', !isVisible);
+
+            // Adjust container scroll behavior when content is visible
+            const hasVisibleContent = [...allContent].some(item => item.style.display === "block");
+            if (hasVisibleContent) {
+                container.classList.add('expanded');  // Show scrollbar
+            } else {
+                container.classList.remove('expanded');  // Hide scrollbar
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="./student dashboard.html">Dashboard</a>
+            <a href="./courses.html">Manage Courses</a>
+            <a href="./quiz.html">Quizzes</a>
+            <a href="./grades.html">Gardes</a>
+        </nav>
+    </header>
+
+    <h1>French for Beginners</h1>
+    <p>Start your journey of learning French with the basics of the language, from pronunciation to vocabulary and grammar essentials.</p>
+
+    <div class="lessons-container">
+        <div class="lesson">
+            <button onclick="toggleLessonContent('lesson1', this)">Lesson 1: First Steps in French</button>
+            <div id="lesson1" class="lesson-content">
+                <h3>Alphabet & Pronunciation</h3>
+                    <div>
+                        <div>Vowels: a, e, i, o, u, y</div>
+                        <div>Special characters: é, è, ê, ë, ç, â, î, ô, û</div>
+                        <div>Silent letters rule</div>
+                        <div>Liaison concept</div>
+                    </div>
+            
+                <h3>Essential Phrases</h3>
+                <div>
+                    <div>Bonjour = Hello</div>
+                    <div>Au revoir = Goodbye</div>
+                    <div>S'il vous plaît = Please</div>
+                    <div>Merci = Thank you</div>
+                    <div>De rien = You're welcome</div>
+                    <div>Comment allez-vous? = How are you?</div>
+                    <div>Très bien = Very well</div>
+                    <div>Excusez-moi = Excuse me</div>
+                    <div>Je ne comprends pas = I don't understand</div>
+                    <div>Parlez lentement = Speak slowly</div>
+                </div>
+                <h3>Numbers 0-10</h3>
+                <div>
+                    <div>0 = zéro</div>
+                    <div>1 = un</div>
+                    <div>2 = deux</div>
+                    <div>3 = trois</div>
+                    <div>4 = quatre</div>
+                    <div>5 = cinq</div>
+                    <div>6 = six</div>
+                    <div>7 = sept</div>
+                    <div>8 = huit</div>
+                    <div>9 = neuf</div>
+                    <div>10 = dix</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <button onclick="toggleLessonContent('lesson2', this)">Lesson 2:  Basic French Grammar</button>
+            <div id="lesson2" class="lesson-content">
+                <h3>Personal Pronouns</h3>
+                    <div>
+                        <div>Je = I</div>
+                        <div>Tu = You (informal)</div>
+                        <div>Il/Elle = He/She</div>
+                        <div>Nous = We</div>
+                        <div>Vous = You (formal/plural)</div>
+                        <div>Ils/Elles = They</div>
+                    </div>
+                <h3>Basic Verbs (Present Tense)</h3>
+                    <h4>Être = to be</h4>
+                    <div>
+                        <div>Je suis = I am</div>
+                        <div>Tu es = You are</div>
+                        <div>Il/Elle est = He/She is</div>
+                    </div>
+                    <h4>Avoir= to have</h4>
+                    <div>
+                        <div>J'ai = I have</div>
+                        <div>Tu as = You have</div>
+                        <div>Il/Elle a = He/She has</div>
+                    </div>
+
+                    <h4>Aller = To go</h4>
+                    <div>
+                        <div>Je vais = I go</div>
+                        <div>Tu vas = You go</div>
+                        <div>Il/Elle va = He/She goes</div>
+                    </div>
+                
+                <h3>Essential Vocabulary</h3>
+                    <h4>Days:</h4>
+                    <div>
+                        <div>Lundi = Monday</div>
+                        <div>Mardi = Tuesday</div>
+                        <div>Mercredi = Wednesday</div>
+                        <div>Jeudi = Thursday</div>
+                        <div>Vendredi = Friday</div>
+                        <div>Samedi = Saturday</div>
+                        <div>Dimanche = Sunday</div>
+                    </div>
+
+                    <h4>Colors:</h4>
+                    <div>
+                        <div>Rouge = Red</div>
+                        <div>Bleu = Blue</div>
+                        <div>Vert = Green</div>
+                        <div>Jaune = Yellow</div>
+                        <div>Noir = Black</div>
+                        <div>Blanc = White</div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <button onclick="toggleLessonContent('lesson3', this)">Lesson 3: Practical French</button>
+            <div id="lesson3" class="lesson-content">
+                <h3>Articles</h3>
+                    <h4>Definite:</h4>
+                    <div>
+                        <div>Le = The (masculine)</div>
+                        <div>La = The (feminine)</div>
+                        <div>Les = The (plural)</div>                        
+                    </div>
+                
+                    <h4>Indefinite:</h4>
+                        <div>
+                            <div>Un = A/An (masculine)</div>
+                            <div>Une = A/An (feminine)</div>
+                            <div>Des = Some</div>
+                        </div>
+                
+                <h3>Question Words</h3>
+                <div>
+                    <div>Quoi? = What?</div>
+                    <div>Qui? = Who?</div>
+                    <div>Où? = Where?</div>
+                    <div>Quand? = When?</div>
+                    <div>Pourquoi? = Why?</div>
+                    <div>Comment? = How?</div>
+                </div>
+
+                <h3>Basic Adjectives</h3>
+                <div>
+                    <div>Grand = Big/Tall</div>
+                    <div>Petit = Small</div>
+                    <div>Beau/Belle = Beautiful</div>
+                    <div>Nouveau/Nouvelle = New</div>
+                    <div>Vieux/Vieille = Old</div>
+                    <div>Bon/Bonne = Good</div>
+                    <div>Mauvais/Mauvaise = Bad</div>
+                </div>                
+            </div>
+        </div>
+
+        <div class="lesson">
+            <button onclick="toggleLessonContent('lesson4', this)">Lesson 4: Real-Life French </button>
+            <div id="lesson4" class="lesson-content">
+                <h3>Restaurant Phrases</h3>
+                <div>
+                    <div>L'addition, s'il vous plaît = The bill, please</div>
+                    <div>Je voudrais... = I would like...</div>
+                    <div>Avez-vous...? = Do you have...?</div>
+                    <div>C'est délicieux = It's delicious</div>
+                    <div>Le menu, s'il vous plaît = The menu, please</div>
+                </div>
+
+                <h3>Shopping Vocabulary</h3>
+                <div>
+                    <div>C'est combien? = How much is it?</div>
+                    <div>C'est trop cher = It's too expensive</div>
+                    <div>La taille = The size</div>
+                    <div>Les soldes = The sales</div>
+                    <div>L'essayage = Fitting room</div>
+                </div>
+
+                <h3>Emergency Phrases</h3>
+                <div>
+                    <div>Au secours! = Help!</div>
+                    <div>J'ai besoin d'un médecin = I need a doctor</div>
+                    <div>Où est l'hôpital? = Where is the hospital?</div>
+                    <div>Appelez la police = Call the police</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="button-container">
+        <a class="btn btn-blue" href="./courses.html">Go Back</a>
+        <a class="btn btn-green" href="./french quiz.html">Take Quiz</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="../privacy.html">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

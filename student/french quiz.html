@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Shared styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            margin-top: -3px;
+            z-index: 1000;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #e94560;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        h2 {
+            color: #e94560;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 35px;
+        }
+
+        .quiz-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .question-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .option:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(10px);
+        }
+
+        .option.selected {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .submit-btn, .retry-btn {
+            background-color: #e94560;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover, .retry-btn:hover {
+            background-color: #d63384;
+        }
+
+        /* Add this CSS for the submit button container */
+        .submit-btn-container {
+            grid-column: span 5; /* Make it span across all columns */
+            text-align: center;  /* Center the button */
+            margin-top: 20px;    /* Add some spacing above */
+        }
+
+        /* Results page specific styles */
+        .score-display {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .option.correct {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .option.incorrect {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .option.correct-answer {
+            background-color: #28a745;
+            color: white;
+            border: 2px solid #fff;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="./student dashboard.html">Dashboard</a>
+        <a href="./courses.html">Manage Courses</a>
+        <a href="./quiz.html">Quizzes</a>
+        <a href="./grades.html">Gardes</a>
+    </nav>
+
+    <h1>French for Beginners</h1>
+    <h2>Quiz</h2>
+    <div id="quiz-view" class="quiz-container">
+        <!-- Questions will be populated by JavaScript -->
+    </div>
+
+    <div id="results-view" class="quiz-container" style="display: none;">
+        <div class="score-display">Your Score: <span id="score">0</span>/100</div>
+        <div id="results-container" class="quiz-container"></div> <!-- Added the quiz-container class here -->
+        <button class="retry-btn" onclick="retryQuiz()">Try Again</button>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="../privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Function to shuffle an array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+        }
+
+        // Quiz data with original correct answer index
+        const quizData = [
+            { "question": "What is 'Bonjour' in English?", "options": ["Good morning", "Good evening", "Hello", "Goodbye"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the French translation for 'Goodbye'?", "options": ["Au revoir", "Salut", "Merci", "Bienvenue"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the correct form of 'to be' in the first person singular in French?", "options": ["Suis", "Es", "Sommes", "Êtes"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is 'Merci' in English?", "options": ["Thank you", "Hello", "Please", "Goodbye"], "correct": 0, "originalCorrect": 0 },
+            { "question": "Which of these is the correct translation for 'I love you' in French?", "options": ["Je t'aime", "Je suis", "Je mange", "Je vais"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the French word for 'water'?", "options": ["Eau", "Lait", "Vin", "Jus"], "correct": 0, "originalCorrect": 0 },
+            { "question": "Which is the correct verb form for 'je' in 'je mange' (I eat)?", "options": ["Mange", "Manger", "Mangée", "Mangerai"], "correct": 0, "originalCorrect": 0 },
+            { "question": "Which of the following is a common way to say goodbye in French?", "options": ["Au revoir", "Bonjour", "Merci", "S'il vous plaît"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the plural form of 'chat' (cat) in French?", "options": ["Chats", "Chatses", "Chattes", "Chateaux"], "correct": 0, "originalCorrect": 0 },
+            { "question": "Which of these words means 'book' in French?", "options": ["Livre", "Table", "Fenêtre", "Chaise"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the French phrase for 'How are you?'", "options": ["Comment ça va?", "Où est-ce?", "Quel âge as-tu?", "D'où viens-tu?"], "correct": 0, "originalCorrect": 0 },
+            { "question": "Which of the following is the correct conjugation of 'avoir' (to have) in the first person singular present tense?", "options": ["J'ai", "Tu as", "Il a", "Nous avons"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the meaning of 'toujours' in English?", "options": ["Always", "Never", "Sometimes", "Rarely"], "correct": 0, "originalCorrect": 0 },
+            { "question": "How do you say 'Good night' in French?", "options": ["Bonne nuit", "Bonsoir", "Bonjour", "Bonne journée"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the correct form of the verb 'être' (to be) for 'they' (ils/elles)?", "options": ["Sont", "Est", "Suis", "Sommes"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the French word for 'thank you'?", "options": ["Merci", "S'il vous plaît", "Excusez-moi", "Bienvenue"], "correct": 0, "originalCorrect": 0 },
+            { "question": "How do you say 'I don't understand' in French?", "options": ["Je ne comprends pas", "Je parle", "Je vais bien", "Je sais"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the word for 'house' in French?", "options": ["Maison", "Voiture", "Arbre", "École"], "correct": 0, "originalCorrect": 0 },
+            { "question": "What is the formal way to ask 'What is your name?' in French?", "options": ["Comment vous appelez-vous?", "Comment tu t'appelles?", "Où allez-vous?", "Que faites-vous?"], "correct": 0, "originalCorrect": 0 },
+            { "question": "Which of these words means 'apple' in French?", "options": ["Pomme", "Poire", "Banane", "Orange"], "correct": 0, "originalCorrect": 0 }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Function to initialize the quiz
+        function initializeQuiz() {
+            const quizView = document.getElementById("quiz-view");
+            quizView.innerHTML = '';
+
+            // Randomize the questions
+            shuffleArray(quizData);
+
+            // Create question elements dynamically
+            quizData.forEach((item, index) => {
+                const questionBox = document.createElement('div');
+                questionBox.classList.add('question-box');
+                questionBox.innerHTML = `
+                    <div class="question">${item.question}</div>
+                    <div class="options-container">
+                        ${item.options.map((option, i) => `
+                            <div class="option" onclick="selectOption(event, ${index}, ${i})">${option}</div>
+                        `).join('')}
+                    </div>
+                `;
+                quizView.appendChild(questionBox);
+            });
+
+            // Add submit button below the last question in a centered div
+            const submitBtnContainer = document.createElement('div');
+            submitBtnContainer.classList.add('submit-btn-container');
+            submitBtnContainer.innerHTML = `
+                <button class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+            `;
+            quizView.appendChild(submitBtnContainer);
+        }
+
+        // Function to select an option
+        function selectOption(event, questionIndex, optionIndex) {
+            const question = quizData[questionIndex];
+            const selectedOption = event.target;
+
+            // Clear previous selections
+            const options = selectedOption.parentElement.children;
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+
+            // Mark current selection
+            selectedOption.classList.add('selected');
+
+            // Store the user's selection (you can add logic here to track the user's choice)
+            quizData[questionIndex].selected = optionIndex;
+        }
+
+        // Function to submit the quiz
+        function submitQuiz() {
+            score = 0;
+            quizData.forEach(item => {
+                if (item.selected === item.correct) {
+                    score += 5; // Add score for correct answers
+                }
+            });
+
+            const currentDate = new Date().toLocaleString("en-IN", {
+                timeZone: "Asia/Kolkata",  // IST timezone
+                hour12: true, // 12-hour clock format
+                hour: "2-digit",
+                minute: "2-digit",
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            });
+
+            localStorage.setItem("frenchQuizScore", score);
+            localStorage.setItem("frenchQuizDate", currentDate);
+
+            // Hide quiz and show results
+            document.getElementById("quiz-view").style.display = "none";
+            const resultsView = document.getElementById("results-view");
+            resultsView.style.display = "block";
+            window.scrollTo(0, 0);
+
+            // Display score
+            document.getElementById("score").textContent = score;
+
+            // Display results
+            const resultsContainer = document.getElementById("results-container");
+            quizData.forEach(item => {
+                const resultBox = document.createElement('div');
+                resultBox.classList.add('question-box');
+                resultBox.innerHTML = `
+                    <div class="question">${item.question}</div>
+                    <div class="options-container">
+                        ${item.options.map((option, i) => `
+                            <div class="option ${i === item.correct ? 'correct-answer' : ''} ${i === item.selected && i !== item.correct ? 'incorrect' : ''}">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                resultsContainer.appendChild(resultBox);
+            });
+        }
+
+        // Retry quiz function
+        function retryQuiz() {
+            // Hide results and show quiz again
+            document.getElementById("results-view").style.display = "none";
+            document.getElementById("quiz-view").style.display = "block";
+            window.scrollTo(0, 0);
+
+            // Reset the quiz data
+            quizData.forEach(item => {
+                item.selected = undefined;
+            });
+
+            // Reinitialize the quiz layout
+            initializeQuiz();
+        }
+
+        // Initialize the quiz on page load
+        window.onload = initializeQuiz;
+    </script>
+</body>
+</html>

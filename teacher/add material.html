@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course Material</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            margin-top: -15px;
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #e94560;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 900px;
+        }
+
+        .lesson-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .lesson-title h3 {
+            margin: 0;
+            font-size: 1.7rem;
+            color: #ffffff;
+        }
+
+        .content-section {
+            margin-top: 15px;
+            text-align: left;
+            margin-right: 5px;
+        }
+
+        .content-section strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        textarea {
+            width: calc(100% - 15px);
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
+            border: 1px solid #00d9ff;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+
+        .button-container {
+            margin-top: 15px;
+        }
+
+        button {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background: #d83755;
+        }
+
+        main {
+            flex: 1 0 auto;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        footer {
+            flex-shrink: 0;
+            margin-top: 20px;
+            padding: 10px 0;
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        #nextPageLink {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="./student_dashboard.html">Dashboard</a>
+            <a href="./manage courses.html">Manage Courses</a>
+            <a href="./quiz.html">Quizzes</a>
+            <a href="./grades.html">Grades</a>
+        </nav>
+        <h1>Add Course Material</h1>
+    </header>
+
+    <main>
+        <div class="container" id="course-container">
+            <!-- Placeholder for lessons -->
+        </div>
+
+        <div class="button-container">
+            <button id="add-lesson">Add Lesson</button>
+            <button id="save-course">Save Course</button>
+        </div>
+        
+        <!-- Hidden link for navigation -->
+        <a id="nextPageLink" href="./manage courses.html"></a>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="../privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        const courseContainer = document.getElementById('course-container');
+        const addLessonButton = document.getElementById('add-lesson');
+        const saveCourseButton = document.getElementById('save-course');
+        const nextPageLink = document.getElementById('nextPageLink');
+
+        let lessonCount = 0;
+
+        // Function to add a lesson
+        const addLesson = () => {
+            lessonCount++;
+            const lessonDiv = document.createElement('div');
+            lessonDiv.className = 'lesson-container';
+            lessonDiv.dataset.lesson = lessonCount;
+
+            lessonDiv.innerHTML = `
+                <div class="lesson-title">
+                    <h3 contenteditable="true">Lesson ${lessonCount}</h3>
+                </div>
+                <div class="subheading-container">
+                    <div class="content-section">
+                        <strong contenteditable="true">Subheading 1</strong>
+                        <textarea placeholder="Enter content here"></textarea>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button class="add-subheading">Add Subheading</button>
+                    <button class="save-lesson">Save Lesson</button>
+                </div>
+            `;
+
+            courseContainer.appendChild(lessonDiv);
+        };
+
+        // Event listener for adding a lesson
+        addLessonButton.addEventListener('click', addLesson);
+
+        // Event listener for adding subheadings
+        courseContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('add-subheading')) {
+                const subheadingContainer = event.target.closest('.lesson-container').querySelector('.subheading-container');
+
+                const newSubheading = document.createElement('div');
+                newSubheading.className = 'content-section';
+                newSubheading.innerHTML = `
+                    <strong contenteditable="true">New Subheading</strong>
+                    <textarea placeholder="Enter content here"></textarea>
+                `;
+
+                subheadingContainer.appendChild(newSubheading);
+            }
+        });
+
+        // Save individual lesson
+        courseContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('save-lesson')) {
+                const lessonDiv = event.target.closest('.lesson-container');
+                const lessonNumber = lessonDiv.dataset.lesson;
+                const title = lessonDiv.querySelector('.lesson-title h3').innerText;
+                const sections = Array.from(lessonDiv.querySelectorAll('.content-section')).map(section => ({
+                    subheading: section.querySelector('strong').innerText,
+                    content: section.querySelector('textarea').value,
+                }));
+
+                const lessonData = { title, sections };
+                localStorage.setItem(`lesson-${lessonNumber}`, JSON.stringify(lessonData));
+                alert(`Lesson ${lessonNumber} saved!`);
+            }
+        });
+
+        // Save the entire course
+        saveCourseButton.addEventListener('click', () => {
+            const allLessons = Array.from(document.querySelectorAll('.lesson-container')).map(lessonDiv => {
+                const lessonNumber = lessonDiv.dataset.lesson;
+                const title = lessonDiv.querySelector('.lesson-title h3').innerText;
+                const sections = Array.from(lessonDiv.querySelectorAll('.content-section')).map(section => ({
+                    subheading: section.querySelector('strong').innerText,
+                    content: section.querySelector('textarea').value,
+                }));
+
+                return { lessonNumber, title, sections };
+            });
+
+            localStorage.setItem('course', JSON.stringify(allLessons));
+            
+            // Show alert and handle navigation
+            alert('Course saved successfully!');
+            nextPageLink.click(); // Trigger the navigation after alert
+        });
+    </script>
+</body>
+</html>

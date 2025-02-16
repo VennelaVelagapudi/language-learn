@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Courses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460), 
+                        url('https://via.placeholder.com/1500x1000/1a1a2e/ffffff?text=Language+Learning+App') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 0 20px;
+            text-align: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            margin-top: -15px;
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            margin: 20px auto;
+            flex: 1;
+            padding-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-content: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            font-size: 20px;
+        }
+
+        .course-container h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.7rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .buttons .btn {
+            padding: 10px 20px;
+            background-color: #e94560;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            width: fit-content;
+        }
+
+        .buttons .btn:hover {
+            background-color: #f56c85;
+            transform: scale(1.05);
+        }
+
+        .unenroll-btn {
+            background-color: #ff4e42;
+        }
+
+        .unenroll-btn:hover {
+            background-color: #f56c85;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 20px;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .add-course-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .add-course-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="./student_dashboard.html">Dashboard</a>
+        <a href="./courses.html">Manage Courses</a>
+        <a href="./quiz.html">Quizzes</a>
+        <a href="./grades.html">Grades</a>
+    </nav>
+</header>
+
+<section class="content">
+    <h2>Manage Your Courses</h2>
+    <div class="dashboard-grid course-list">
+        <!-- Dynamically loaded course containers will appear here -->
+    </div>
+    <a href="./add course.html" class="add-course-btn">Add New Course</a>
+</section>
+
+<footer>
+    <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="../privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+    window.onload = function() {
+        let courses = JSON.parse(localStorage.getItem('courses')) || [];
+        const coursesContainer = document.querySelector('.course-list');
+
+        // Loop through the stored courses and display them
+        courses.forEach(course => {
+            const courseDiv = document.createElement('div');
+            courseDiv.classList.add('course-container');
+            courseDiv.innerHTML = `
+                <h3>${course}</h3>
+                <div class="buttons">
+                    <a class="btn" href="./${course.toLowerCase()}.html">Go to Course</a>
+                    <a class="btn unenroll-btn" href="#" onclick="unenrollCourse('${course}')">Unenroll</a>
+                </div>
+            `;
+            coursesContainer.appendChild(courseDiv);
+        });
+    }
+
+    function unenrollCourse(courseName) {
+        const confirmation = confirm(`Are you sure you want to unenroll from ${courseName}?`);
+        if (confirmation) {
+            let courses = JSON.parse(localStorage.getItem('courses')) || [];
+            courses = courses.filter(course => course !== courseName);
+            localStorage.setItem('courses', JSON.stringify(courses));
+
+            // Remove the course container from the page
+            const courseElement = Array.from(document.querySelectorAll('.course-container h3')).find(el => el.textContent === courseName);
+            if (courseElement) {
+                courseElement.closest('.course-container').remove();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

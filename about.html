@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;  /* Hide horizontal scrollbar */
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460), 
+                        url('https://via.placeholder.com/1500x1000/1a1a2e/ffffff?text=Language+Learning+App') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;  /* Ensure footer is pushed to the bottom */
+            text-align: center;
+            min-height: 100vh;  /* Full height of viewport */
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            margin-bottom: 20px;
+            margin-top: -22px;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e94560;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-top: -50px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .about {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            flex-grow: 1; /* Allow content to take up available space */
+            margin-left: 60px;
+            margin-right: 60px; /* Add margins on both sides */
+        }
+
+        .btn-blue {
+            display: block;
+            width: 70%;
+            max-width: 200px;
+            padding: 15px;
+            margin: 1.5rem auto;
+            background: #4CAF50;
+            color: white;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-blue:hover {
+            background: #45a049;
+            border-color: #45a049;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            padding: 15px 0;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./loginas.html">Login</a>
+            <a href="./features.html">Features</a>
+            <a href="./about.html">About Us</a>
+            <a href="./contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <section class="about">
+        <h1>About Us</h1>
+        <p>Welcome to the Language Learning App. Whether you're a teacher or a student, or even both, we provide a platform that helps you achieve your language learning goals. Our mission is to make learning languages accessible, engaging, and fun for everyone around the world.</p>
+
+        <p>As a teacher, you have access to tools that allow you to create custom lessons, monitor your students' progress, and engage with learners from around the world. Our platform empowers educators to share their knowledge and support learners in a personalized way. We believe that teaching and learning are most effective when tailored to the individual’s needs and preferences.</p>
+
+        <p>As a student, you can explore a wide range of courses, track your learning progress, and interact with teachers and fellow learners. Our app adapts to your learning pace, ensuring that every step of your language journey is enjoyable and effective. You’ll have access to interactive lessons, quizzes, and real-world practice, so you can immerse yourself in the language like never before.</p>
+
+        <p>And if you're both a teacher and a student, the app gives you the flexibility to manage both roles simultaneously. You can teach while learning, gaining insights from both perspectives and enhancing your own language abilities. This dual experience enriches your knowledge and helps you connect with others on a deeper level.</p>
+
+        <p>We are committed to building a supportive and inclusive community. Our platform promotes cultural exchange and mutual growth, making language learning not just about words, but about connecting with others and broadening your worldview.</p>
+
+        <p>Over the years, we have empowered thousands of learners to achieve their dreams, be it mastering a language for travel, business, or personal development. We understand that every learner has unique challenges and goals, and our innovative features ensure that each individual can progress confidently at their own pace.</p>
+
+        <p>Join us on this exciting journey of discovery and growth. With cutting-edge technology and a global community of passionate educators and learners, the Language Learning App is your trusted companion in mastering a new language.</p>
+
+        <p>Our app not only provides structured lessons but also incorporates gamification features to make learning fun and engaging. You can earn badges, complete challenges, and compete on leaderboards to stay motivated. We believe that making learning interactive and enjoyable enhances retention and fosters a lifelong love for languages.</p>
+
+        <p>Furthermore, our platform is designed to adapt to your evolving needs. Whether you are a beginner starting with the basics or an advanced learner seeking to refine your skills, our app has something for everyone. With personalized recommendations and AI-driven insights, your learning experience becomes more efficient and effective.</p>
+
+        <p>We also prioritize accessibility and inclusivity. Our app supports multiple languages and provides features for differently-abled learners, ensuring that everyone can benefit from our platform. We are constantly innovating to remove barriers to education and create opportunities for all.</p>
+
+        <a href="./login as.html" class="btn-blue">Start Learning Now</a>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="./privacy.html">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

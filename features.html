@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;  /* Hide horizontal scrollbar */
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #0f3460), 
+                        url('https://via.placeholder.com/1500x1000/1a1a2e/ffffff?text=Language+Learning+App') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;  /* Ensure footer is pushed to the bottom */
+            text-align: center;
+            min-height: 100vh;  /* Full height of viewport */
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin-top: 0px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            margin-top: -20px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+    
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e94560;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-top: -50px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            flex-grow: 1; /* Allow content to take up available space */
+            margin-left: 60px;
+            margin-right: 60px; /* Add margins on both sides */
+        }
+
+        .btn-blue {
+            display: block;
+            width: 70%;
+            max-width: 200px;
+            padding: 15px;
+            margin: 1.5rem auto;
+            background: #4CAF50;
+            color: white;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-blue:hover {
+            background: #45a049;
+            border-color: #45a049;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            padding: 15px 0;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./loginas.html">Login</a>
+            <a href="./features.html">Features</a>
+            <a href="./about.html">About Us</a>
+            <a href="./contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <section class="features">
+        <h1>Features</h1>
+        <p>Our Language Learning Website offers a wide range of tools to help both students and teachers succeed. Whether you’re learning a new language or enhancing your teaching skills, the website is designed to make the process easier and more effective.</p>
+
+        <p><strong>Customizable Lessons:</strong> Teachers can create lessons that fit the needs of each student. The website includes interactive tools for building engaging and effective lessons that cater to various learning styles. Additionally, lessons can be adapted to include multimedia content such as videos, audio clips, and images, making them highly engaging and tailored to different levels of proficiency. The system also integrates AI suggestions to recommend lesson plans based on a student’s progress and preferences.</p>
+
+        <p><strong>Progress Tracking:</strong> Students can track their progress, while teachers can monitor improvements and adjust lessons accordingly to ensure continued success. With data-driven insights, teachers can identify strengths and areas for improvement, creating a highly personalized learning path for every student. The website also includes motivational features such as weekly performance summaries and badges to celebrate milestones and encourage learners to stay consistent.</p>
+
+        <p><strong>Real-World Practice:</strong> The website offers interactive exercises and quizzes that mimic real-life situations, helping students build practical language skills they can use daily. Offline access ensures that students can practice anytime, anywhere, even without an internet connection. Conversation simulators allow students to practice speaking with AI-driven prompts, improving fluency and confidence in a safe, judgment-free environment.</p>
+
+        <p><strong>Community Engagement:</strong> With features like discussion forums and group lessons, the website fosters global connections and encourages cultural exchange among students and teachers. This feature allows learners to explore new cultures, making the language-learning journey more enriching and dynamic. Virtual events such as cultural workshops and live webinars connect users from different parts of the world, providing a platform for meaningful exchanges and shared learning experiences.</p>
+
+        <p><strong>Dual Role Flexibility:</strong> The website allows users to take on both student and teacher roles, enriching the learning experience as they teach while learning. By integrating AI-driven tools, such as instant feedback on grammar and pronunciation, the website ensures a smooth experience for users in either role. This dual functionality is perfect for peer-to-peer learning, allowing users to collaborate and grow together while benefiting from both perspectives.</p>
+
+        <a href="./login as.html" class="btn-blue">Start Learning Now</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="./privacy.html">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

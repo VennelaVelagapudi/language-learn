@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Course - French</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            z-index: 1000;
+            margin-top: -3px;
+            background: linear-gradient(to right, #1a1a2e, #0f3460);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        header {
+            margin-top: 80px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            color: #e94560;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .lesson-container {
+            margin: 20px auto;
+            width: 800px;
+            min-height: 400px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-container h3 {
+            margin-top: 0;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .content-section {
+            flex: 1;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .content-section strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #00d9ff;
+        }
+
+        .editable {
+            width: 100%;
+            margin: 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            min-height: 60px;
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+
+        textarea.editable {
+            width: 100%;
+            min-height: 80px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
+            border: 1px solid #00d9ff;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            text-align: center;
+            padding-top: 15px;
+            margin-top: auto;
+        }
+
+        .edit-btn, .save-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #e94560;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-family: 'Raleway', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .edit-btn:hover, .save-btn:hover {
+            background-color: #d83755;
+            transform: scale(1.05);
+        }
+
+        .bottom-text {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.1rem;
+        }
+
+        .bottom-text p {
+            color: #fff;
+            margin: 0;
+            display: inline;
+        }
+
+        .bottom-text a {
+            color: #00d9ff;
+            text-decoration: none;
+            margin-left: 8px;
+            transition: color 0.3s;
+        }
+
+        .bottom-text a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="./teacher dashboard.html">Dashboard</a>
+            <a href="./manage courses.html">Manage Courses</a>
+        </nav>
+    </header>
+
+    <h1>Edit Course: French for Beginners</h1>
+
+    <div class="lesson-container" data-lesson="1">
+        <h3>Lesson 1: First Steps in French</h3>
+        <div class="content-section">
+            <strong>Alphabet & Pronunciation:</strong>
+            <p class="editable">Vowels: a, e, i, o, u<br>Special characters: é, è, ê, ë, ç, â, î, ô, û<br>Silent letters rule<br>Liaison concept</p>
+        </div>
+        <div class="content-section">
+            <strong>Essential Phrases:</strong>
+            <p class="editable">Bonjour = Hello, Au revoir = Goodbye, S'il vous plaît = Please, Merci = Thank you, De rien = You're welcome, Comment allez-vous? = How are you?, Très bien = Very well, Excusez-moi = Excuse me, Je ne comprends pas = I don't understand, Parlez lentement = Speak slowly</p>
+        </div>
+        <div class="content-section">
+            <strong>Numbers 0-10:</strong>
+            <p class="editable">0 = zéro, 1 = un, 2 = deux, 3 = trois, 4 = quatre, 5 = cinq, 6 = six, 7 = sept, 8 = huit, 9 = neuf, 10 = dix</p>
+        </div>
+        <div class="button-container">
+            <button class="edit-btn">Edit</button>
+            <button class="save-btn" style="display: none;">Save</button>
+        </div>
+    </div>
+
+    <div class="lesson-container" data-lesson="2">
+        <h3>Lesson 2: Basic French Grammar</h3>
+        <div class="content-section">
+            <strong>Personal Pronouns:</strong>
+            <p class="editable">Je = I, Tu = You (informal), Il/Elle = He/She, Nous = We, Vous = You (formal/plural), Ils/Elles = They</p>
+        </div>
+        <div class="content-section">
+            <strong>Basic Verbs (Present Tense):</strong>
+            <h4>Être = to be</h4>
+            <p class="editable">Je suis = I am, Tu es = You are, Il/Elle est = He/She is</p>
+            <h4>Avoir = to have</h4>
+            <p class="editable">J'ai = I have, Tu as = You have, Il/Elle a = He/She has</p>
+            <h4>Aller = To go</h4>
+            <p class="editable">Je vais = I go, Tu vas = You go, Il/Elle va = He/She goes</p>
+        </div>
+        <div class="content-section">
+            <strong>Essential Vocabulary:</strong>
+            <h4>Days:</h4>
+            <p class="editable">Lundi = Monday, Mardi = Tuesday, Mercredi = Wednesday, Jeudi = Thursday, Vendredi = Friday, Samedi = Saturday, Dimanche = Sunday</p>
+            <h4>Colors:</h4>
+            <p class="editable">Rouge = Red, Bleu = Blue, Vert = Green, Jaune = Yellow, Noir = Black, Blanc = White</p>
+        </div>
+        <div class="button-container">
+            <button class="edit-btn">Edit</button>
+            <button class="save-btn" style="display: none;">Save</button>
+        </div>
+    </div>
+
+    <div class="lesson-container" data-lesson="3">
+        <h3>Lesson 3: Practical French</h3>
+        <div class="content-section">
+            <strong>Articles:</strong>
+            <h4>Definite:</h4>
+            <p class="editable">Le = The (masculine), La = The (feminine), Les = The (plural)</p>
+            <h4>Indefinite:</h4>
+            <p class="editable">Un = A (masculine), Une = A (feminine), Des = Some (plural)</p>
+        </div>
+        <div class="content-section">
+            <strong>Prepositions:</strong>
+            <p class="editable">À = At/to, De = From, En = In, Sur = On, Sous = Under, Avec = With, Sans = Without</p>
+        </div>
+        <div class="content-section">
+            <strong>Common Phrases:</strong>
+            <p class="editable">Où est…? = Where is…?, Combien ça coûte? = How much does it cost?, Pouvez-vous m'aider? = Can you help me?, Je voudrais… = I would like…</p>
+        </div>
+        <div class="button-container">
+            <button class="edit-btn">Edit</button>
+            <button class="save-btn" style="display: none;">Save</button>
+        </div>
+    </div>
+
+    <div class="bottom-text">
+        <p>Done?</p>
+        <a href="./manage courses.html">Back to Courses</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Language Learning Website. All rights reserved. <a href="../privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const container = button.closest('.lesson-container');
+                const saveButton = container.querySelector('.save-btn');
+                
+                container.querySelectorAll('.editable').forEach(paragraph => {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = paragraph.innerHTML.replace(/<br>/g, '\n');
+                    textarea.classList.add('editable');
+                    paragraph.replaceWith(textarea);
+                });
+
+                button.style.display = 'none';
+                saveButton.style.display = 'inline-block';
+            });
+        });
+
+        document.querySelectorAll('.save-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const container = button.closest('.lesson-container');
+                const editButton = container.querySelector('.edit-btn');
+                
+                container.querySelectorAll('textarea').forEach(textarea => {
+                    const paragraph = document.createElement('p');
+                    paragraph.innerHTML = textarea.value.replace(/\n/g, '<br>');
+                    paragraph.classList.add('editable');
+                    textarea.replaceWith(paragraph);
+                });
+
+                button.style.display = 'none';
+                editButton.style.display = 'inline-block';
+            });
+        });
+    </script>
+</body>
+</html>
